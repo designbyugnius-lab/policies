@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policies</title>
-<meta name="description" content="Privacy policies for browser extensions.">
+<title>Tab Sessions Privacy Policy</title>
+<meta name="description" content="Privacy policy for the Tab Sessions Chrome extension. No server, no account, no network requests.">
 <style>
+  /* Paletė paimta is paties pletinio: #2856c9 yra ikonos melyna, o fonas
+     #f1f5fc — tas pats, kuris naudotas screenshot'uose. Politika turi
+     atrodyti kaip to paties produkto dalis, ne kaip svetimas dokumentas.
+     Sriftas — sisteminis, toks pat kaip popup.css, del tos pacios
+     priezasties. */
   :root {
     --bg: #ffffff;
     --surface: #f1f5fc;
@@ -13,66 +18,251 @@
     --muted: #5b6270;
     --line: #dfe4ec;
     --accent: #2856c9;
+    --good: #1f9d55;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #14161a; --surface: #1b1f26; --ink: #eceef1;
-      --muted: #9aa1ab; --line: #2a2f36; --accent: #7aa2fb;
+      --bg: #14161a;
+      --surface: #1b1f26;
+      --ink: #eceef1;
+      --muted: #9aa1ab;
+      --line: #2a2f36;
+      --accent: #7aa2fb;
+      --good: #4cc47f;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #14161a; --surface: #1b1f26; --ink: #eceef1;
-    --muted: #9aa1ab; --line: #2a2f36; --accent: #7aa2fb;
+    --bg: #14161a;
+    --surface: #1b1f26;
+    --ink: #eceef1;
+    --muted: #9aa1ab;
+    --line: #2a2f36;
+    --accent: #7aa2fb;
+    --good: #4cc47f;
   }
+
   * { box-sizing: border-box; }
+
   body {
-    margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 16px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font: 16px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     padding-inline: 16px;
   }
-  .wrap { max-width: 620px; margin-inline: auto; padding-block: 64px 80px; }
-  h1 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 8px; }
-  .sub { color: var(--muted); margin: 0 0 32px; }
-  ul { list-style: none; padding: 0; margin: 0; display: flex;
-       flex-direction: column; gap: 10px; }
-  a.item {
-    display: block;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 16px 18px;
-    text-decoration: none;
-    color: inherit;
+
+  .doc {
+    max-width: 660px;
+    margin-inline: auto;
+    padding-block: 56px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
-  a.item:hover { border-color: var(--accent); }
-  a.item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .name { font-weight: 600; color: var(--accent); }
-  .what { color: var(--muted); font-size: 15px; margin-top: 2px; }
-  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
-           color: var(--muted); font-size: 14px; }
+
+  h1 {
+    font-size: clamp(26px, 5vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .stamp {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  h2 {
+    font-size: 17px;
+    letter-spacing: -0.005em;
+    margin: 36px 0 8px;
+    text-wrap: balance;
+  }
+
+  p, ul { margin: 0 0 12px; }
+  ul { padding-left: 20px; }
+  li { margin: 5px 0; }
+
+  /* Vienintelis pakeltas blokas visame puslapyje. Jame — esme, ir jei
+     kas nors perskaitys tik viena dalyka, turi perskaityti si. */
+  .core {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin: 0 0 4px;
+  }
+  .core p { margin: 0; }
+
+  .never {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+  }
+  .never li {
+    padding-left: 26px;
+    position: relative;
+  }
+  .never li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 10px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 1px;
+  }
+
+  .perms { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 420px;
+    font-size: 15px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { font-weight: 600; white-space: nowrap; }
+  td:first-child { white-space: nowrap; padding-right: 20px; }
+
+  code {
+    background: var(--surface);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 15px;
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Privacy policies</h1>
-    <p class="sub">Privacy policies for browser extensions published by this
-    developer.</p>
+<article class="doc">
+  <h1>Privacy Policy — Tab Sessions</h1>
+  <p class="stamp">Chrome extension · Last updated 19 September 2026</p>
 
-    <ul>
-      <li>
-        <a class="item" href="tab-sessions/">
-          <span class="name">Tab Sessions</span>
-          <div class="what">Chrome extension — save and restore windows and
-          tab groups. No server, no account, no network requests.</div>
-        </a>
-      </li>
-    </ul>
-
-    <footer>
-      Each policy describes only the extension it names.
-    </footer>
+  <div class="core">
+    <p><strong>Tab Sessions has no server, no account, and makes no network
+    requests of any kind.</strong> Everything it saves stays in Chrome's local
+    storage on your own device. Nothing is sent anywhere, because there is
+    nowhere for it to be sent.</p>
   </div>
+
+  <h2>What it stores</h2>
+  <p>When you click <em>Save this window</em> or <em>Save all windows</em>, the
+  extension records, for that session:</p>
+  <ul>
+    <li>the URL and title of each open tab</li>
+    <li>whether a tab is pinned, and its position in the window</li>
+    <li>the title and color of each Chrome tab group</li>
+    <li>the name you give the session, and the time it was saved</li>
+  </ul>
+  <p>It also keeps up to five automatic backups of that same data, so that a
+  crash or a mistake does not lose your sessions.</p>
+
+  <h2>Where it is stored</h2>
+  <p>In <code>chrome.storage.local</code> — Chrome's own local storage on the
+  device you are using. It is not synced, not uploaded, and not readable by
+  the developer or by anyone else.</p>
+
+  <h2>What it does not do</h2>
+  <ul class="never">
+    <li>It does not transmit data anywhere. The extension declares no host
+      permissions and contains no code that makes network requests.</li>
+    <li>It does not use analytics, telemetry, crash reporting or advertising.</li>
+    <li>It does not read the content of the pages you visit. It has no content
+      scripts.</li>
+    <li>It does not require an account, an email address or a sign-in.</li>
+    <li>It does not sell, share or transfer data to third parties.</li>
+    <li>It does not use data for creditworthiness or lending purposes.</li>
+    <li>It does not use data for any purpose unrelated to the single purpose
+      below.</li>
+  </ul>
+
+  <h2>Single purpose</h2>
+  <p>To save your open Chrome windows, tabs and tab groups as named sessions
+  and restore them later. Everything is stored locally.</p>
+
+  <h2>Permissions, and why each is needed</h2>
+  <div class="perms">
+    <table>
+      <thead>
+        <tr><th scope="col">Permission</th><th scope="col">Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>tabs</code></td>
+          <td>To read the URL, title, pinned state and order of your open tabs
+            when you save a session, and to re-apply the pinned state when you
+            restore one.</td>
+        </tr>
+        <tr>
+          <td><code>tabGroups</code></td>
+          <td>To read the title and color of your tab groups when saving, and
+            to recreate them when restoring.</td>
+        </tr>
+        <tr>
+          <td><code>storage</code></td>
+          <td>To keep your saved sessions and their backups on your device.</td>
+        </tr>
+        <tr>
+          <td><code>unlimitedStorage</code></td>
+          <td>So that saving many large windows never silently fails against
+            Chrome's default storage quota.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The extension requests no host permissions, so it has no access to the
+  websites you visit.</p>
+
+  <h2>Export and import</h2>
+  <p>You can export everything to a JSON file at any time. Chrome writes that
+  file to a location you choose, and the extension has no further involvement
+  with it. Importing reads a file you select and replaces your saved sessions;
+  the state from before the import is kept as a backup.</p>
+
+  <h2>Deleting your data</h2>
+  <p>Delete individual sessions from the extension's popup, or remove the
+  extension from Chrome to delete everything it has stored. Because no copy
+  exists anywhere else, removing the extension removes the data.</p>
+
+  <h2>Children</h2>
+  <p>The extension is a general-purpose utility. It is not directed at children
+  and collects no information about who is using it.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If the extension ever changes what it stores or how, this policy will be
+  updated before that version is published, and the date above will change.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy or the extension: use the <em>Support</em> tab
+  on the extension's Chrome Web Store listing, which reaches the developer
+  directly.</p>
+
+  <footer>
+    Tab Sessions is free, has no paid tier, and has no business model that
+    depends on your data.
+  </footer>
+</article>
 </body>
 </html>
