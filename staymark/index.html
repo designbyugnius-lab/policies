@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staymark Privacy Policy</title>
+<meta name="description" content="Privacy policy for the Staymark Chrome extension. Highlights stay on your device. No server, no account, no network requests.">
+<style>
+  /* Paletė paimta is paties pletinio: #2856c9 yra ikonos melyna, o fonas
+     #f1f5fc — tas pats, kuris naudotas screenshot'uose. Politika turi
+     atrodyti kaip to paties produkto dalis, ne kaip svetimas dokumentas.
+     Sriftas — sisteminis, toks pat kaip popup.css, del tos pacios
+     priezasties. */
+  :root {
+    --bg: #ffffff;
+    --surface: #f1f5fc;
+    --ink: #16181d;
+    --muted: #5b6270;
+    --line: #dfe4ec;
+    --accent: #2856c9;
+    --good: #1f9d55;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161a;
+      --surface: #1b1f26;
+      --ink: #eceef1;
+      --muted: #9aa1ab;
+      --line: #2a2f36;
+      --accent: #7aa2fb;
+      --good: #4cc47f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161a;
+    --surface: #1b1f26;
+    --ink: #eceef1;
+    --muted: #9aa1ab;
+    --line: #2a2f36;
+    --accent: #7aa2fb;
+    --good: #4cc47f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding-inline: 16px;
+  }
+
+  .doc {
+    max-width: 660px;
+    margin-inline: auto;
+    padding-block: 56px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  h1 {
+    font-size: clamp(26px, 5vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .stamp {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  h2 {
+    font-size: 17px;
+    letter-spacing: -0.005em;
+    margin: 36px 0 8px;
+    text-wrap: balance;
+  }
+
+  p, ul { margin: 0 0 12px; }
+  ul { padding-left: 20px; }
+  li { margin: 5px 0; }
+
+  /* Vienintelis pakeltas blokas visame puslapyje. Jame — esme, ir jei
+     kas nors perskaitys tik viena dalyka, turi perskaityti si. */
+  .core {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin: 0 0 4px;
+  }
+  .core p { margin: 0; }
+
+  .never {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+  }
+  .never li {
+    padding-left: 26px;
+    position: relative;
+  }
+  .never li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 10px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 1px;
+  }
+
+  .perms { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 420px;
+    font-size: 15px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { font-weight: 600; white-space: nowrap; }
+  td:first-child { white-space: nowrap; padding-right: 20px; }
+
+  code {
+    background: var(--surface);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+<article class="doc">
+  <h1>Privacy Policy — Staymark</h1>
+  <p class="stamp">Chrome extension · Last updated 24 September 2026</p>
+
+  <div class="core">
+    <p><strong>Staymark has no server, no account, and makes no network
+    requests of any kind.</strong> Your highlights and notes are stored in
+    Chrome's local storage on your own device. Nothing is sent anywhere,
+    because there is nowhere for it to be sent.</p>
+  </div>
+
+  <h2>What it stores</h2>
+  <p>For each page on which you make a highlight:</p>
+  <ul>
+    <li>the page address, with the <code>#fragment</code> and common tracking
+      parameters (<code>utm_*</code>, <code>fbclid</code>, <code>gclid</code>)
+      removed</li>
+    <li>the page title and the time it was last changed</li>
+  </ul>
+  <p>For each highlight:</p>
+  <ul>
+    <li>the highlighted text, up to 32 characters before and after it, and a
+      position hint — used only to find the same passage again when you
+      come back</li>
+    <li>its color, the note you wrote (if any), and when it was made</li>
+  </ul>
+  <p>It also keeps copies of that same data so that a crash or a mistake
+  does not lose your highlights: the state before the most recent change,
+  and up to five older copies. It remembers the color you used last.</p>
+  <p>The list of sites where you turned on automatic display is kept by
+  Chrome itself, as a permission you granted.</p>
+
+  <h2>Where it is stored</h2>
+  <p>In <code>chrome.storage.local</code> — Chrome's own local storage on the
+  device you are using. It is not synced, not uploaded, and not readable by
+  the developer or by anyone else.</p>
+
+  <h2>When it reads a page</h2>
+  <p>To draw a highlight, and to find your highlights again, Staymark reads
+  the text of the page in your browser. It does this only:</p>
+  <ul>
+    <li>in the tab where you just used Staymark (the right-click menu, the
+      keyboard shortcut or the toolbar icon), and</li>
+    <li>on sites where you chose to show highlights automatically.</li>
+  </ul>
+  <p>From the page it keeps only the text you highlighted and the few
+  characters around it, as listed above. It does not touch text boxes,
+  input fields or editable areas, and does not read anything you type into
+  a website.</p>
+
+  <h2>What it does not do</h2>
+  <ul class="never">
+    <li>It does not transmit data anywhere. It contains no code that makes
+      network requests.</li>
+    <li>It does not use analytics, telemetry, crash reporting or
+      advertising.</li>
+    <li>It does not record which pages you visit. Only pages on which you
+      made a highlight are stored.</li>
+    <li>It does not require an account, an email address or a sign-in.</li>
+    <li>It does not sell, share or transfer data to third parties.</li>
+    <li>It does not use data for creditworthiness or lending purposes.</li>
+    <li>It does not use data for any purpose unrelated to the single purpose
+      below.</li>
+  </ul>
+
+  <h2>How Chrome Web Store classifies this</h2>
+  <p>Chrome Web Store requires extensions to disclose data they handle even
+  when it never leaves the device. Under those rules, storing page addresses
+  and titles counts as <em>web browsing activity</em>, and storing the text
+  you highlighted counts as <em>website content</em>. Both are disclosed on
+  the store listing. Both stay on your device.</p>
+
+  <h2>Single purpose</h2>
+  <p>To highlight text on web pages, add notes to highlights, and show them
+  again when you return to the page. Everything is stored locally.</p>
+
+  <h2>Permissions, and why each is needed</h2>
+  <div class="perms">
+    <table>
+      <thead>
+        <tr><th scope="col">Permission</th><th scope="col">Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>activeTab</code></td>
+          <td>When you use Staymark from the right-click menu, the shortcut or
+            the toolbar icon, Chrome gives it temporary access to that one
+            tab — to draw the highlight and show your saved ones.</td>
+        </tr>
+        <tr>
+          <td><code>scripting</code></td>
+          <td>To add Staymark's own bundled script and stylesheet to that tab,
+            or to sites where you turned on automatic display.</td>
+        </tr>
+        <tr>
+          <td><code>storage</code></td>
+          <td>To keep your highlights, notes and their backups on your
+            device.</td>
+        </tr>
+        <tr>
+          <td><code>unlimitedStorage</code></td>
+          <td>So that a large collection of highlights and backups never
+            silently fails to save against Chrome's default quota.</td>
+        </tr>
+        <tr>
+          <td><code>contextMenus</code></td>
+          <td>To add "Highlight with Staymark" to the right-click menu when
+            text is selected.</td>
+        </tr>
+        <tr>
+          <td>Optional site access</td>
+          <td>Asked for only when you choose to show highlights automatically
+            on a site, or on all sites. You can turn it off per site in
+            Staymark's options or in Chrome's extension settings. Without it,
+            highlights appear when you click the Staymark icon.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Export and import</h2>
+  <p>You can export everything to a JSON file at any time. Chrome writes that
+  file to a location you choose, and the extension has no further involvement
+  with it. Importing reads a file you select and merges it with what is
+  already there; it never replaces your highlights.</p>
+
+  <h2>Deleting your data</h2>
+  <p>Delete individual highlights and notes from the popup, or remove the
+  extension from Chrome to delete everything it has stored, including
+  backups. Because no copy exists anywhere else, removing the extension
+  removes the data.</p>
+
+  <h2>Children</h2>
+  <p>The extension is a general-purpose utility. It is not directed at children
+  and collects no information about who is using it.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If the extension ever changes what it stores or how, this policy will be
+  updated before that version is published, and the date above will change.</p>
+
+  <h2>Who is responsible</h2>
+  <p>Staymark is provided by <strong>MB FELIRA</strong>, a company registered
+  in the Republic of Lithuania. Use of the extension is also subject to the
+  <a href="terms.html">Terms of Use</a>.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy or the extension: use the <em>Support</em> tab
+  on the extension's Chrome Web Store listing, which reaches the developer
+  directly.</p>
+
+  <footer>
+    Staymark is free, has no paid tier, and has no business model that
+    depends on your data. · <a href="terms.html">Terms of Use</a>
+  </footer>
+</article>
+</body>
+</html>
